@@ -42,7 +42,9 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    if (selectedDates[0]< new Date()) {
+    if (selectedDates[0] < new Date()) {
+      console.log(selectedDates[0]);
+      console.log(new Date());
         // window.alert('Please choose a date in the future');
       Report.failure(
   '🥺 Ooops...', 
@@ -79,6 +81,10 @@ const timer = {
       const deltaTime = turgetTime - currentTime;
       // const { days, hours, minutes, seconds } = convertMs(deltaTime);
       const time = convertMs(deltaTime);
+
+      if (deltaTime <= 1000) {
+        this.stop();   
+      }
 
       upDateTimer(time);          
     }, 1000);    
