@@ -1,6 +1,6 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
-
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 
 const refs = {
@@ -43,11 +43,28 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0]< new Date()) {
-        window.alert('Please choose a date in the future');
+        // window.alert('Please choose a date in the future');
+      Report.failure(
+  '🥺 Ooops...', 
+  'Please, choose a date in the future',
+  'Ok ',
+  {
+     svgSize: '50px',
+  },
+);
         return;
-     } else {
+    } else {
+      Report.success(
+      '👏  Congratulation! ',
+      'Click on START!',
+        'Ok',
+      {
+     svgSize: '50px',
+      },
+        );
       turgetTime = selectedDates[0];
-      refs.startBtn.disabled = false;         
+      refs.startBtn.disabled = false; 
+      
     };   
   },
 };
@@ -70,7 +87,15 @@ const timer = {
   stop() {
     refs.startBtn.disabled = true;
     refs.inputData.disabled = true;    
-    clearInterval(intervalId);    
+    clearInterval(intervalId);   
+    Report.info(
+        'Timer stopped!',
+        'Please, reload this page and choose a new date',
+      'Ok',
+        {
+     svgSize: '50px',
+      },
+      );
     return;
   },
 };
