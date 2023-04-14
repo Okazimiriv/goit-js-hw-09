@@ -10,24 +10,9 @@ const refs = {
   hours: document.querySelector('[data-hours]'),
   minutes: document.querySelector('[data-minutes]'),
   seconds: document.querySelector('[data-seconds]'),
-  timer: document.querySelector('.timer'),
-  value: document.querySelector('.value'),
-  label: document.querySelector('.label'),
-  field: document.querySelector('.field'),
-};
+  };
 
-// 
-const size = '50px';
-refs.timer.style.display = 'flex';
-refs.timer.style.width = '400px';
-refs.timer.style.fontSize = '20px';
-refs.days.style.fontSize = size;
-refs.hours.style.fontSize = size;
-refs.minutes.style.fontSize = size;
-refs.seconds.style.fontSize = size;
 document.body.style.backgroundColor = '#7cc16b';
-//
-
 
 refs.startBtn.disabled = true;
 refs.startBtn.addEventListener('click', timerStart);
@@ -42,9 +27,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    if (selectedDates[0] < new Date()) {
-      console.log(selectedDates[0]);
-      console.log(new Date());
+    if (selectedDates[0] < new Date()) {      
         // window.alert('Please choose a date in the future');
       Report.failure(
   '🥺 Ooops...', 
@@ -65,8 +48,7 @@ const options = {
       },
         );
       turgetTime = selectedDates[0];
-      refs.startBtn.disabled = false; 
-      
+      refs.startBtn.disabled = false;       
     };   
   },
 };
@@ -77,7 +59,8 @@ const options = {
 const timer = { 
   start() {
     intervalId = setInterval(() => {
-      const currentTime = new Date();         
+      const currentTime = Date.now(); 
+      
       const deltaTime = turgetTime - currentTime;
       // const { days, hours, minutes, seconds } = convertMs(deltaTime);
       const time = convertMs(deltaTime);
@@ -154,4 +137,16 @@ function convertMs(ms) {
 
 
 
-
+// function declensionNum(num, words) {
+//   return words[
+//     num % 100 > 4 && num % 100 < 20
+//       ? 2
+//       : [2, 0, 1, 1, 1, 2][num % 10 < 5 ? num % 10 : 5]
+//   ];
+// }
+// rootSelector.querySelector('.js-timer__hours').dataset.title =
+//       declensionNum(hours, ['година', 'години', 'годин']);
+//     rootSelector.querySelector('.js-timer__minutes').dataset.title =
+//       declensionNum(minutes, ['хвилина', 'хвилини', 'хвилин']);
+//     rootSelector.querySelector('.js-timer__seconds').dataset.title =
+//       declensionNum(seconds, ['секунда', 'секунди', 'секунд']);
