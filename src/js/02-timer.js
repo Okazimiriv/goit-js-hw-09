@@ -17,7 +17,7 @@ document.body.style.backgroundColor = '#7cc16b';
 refs.startBtn.disabled = true;
 refs.startBtn.addEventListener('click', timerStart);
 
-
+const TIMER_DELAY = 1000;
 let turgetTime = null;
 let intervalId = null;
 
@@ -70,7 +70,7 @@ const timer = {
       }
 
       upDateTimer(time);          
-    }, 1000);    
+    }, TIMER_DELAY);    
   },
 
   stop() {
