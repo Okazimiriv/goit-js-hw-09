@@ -12,8 +12,9 @@ refs.formEl.addEventListener('click', onSubmitBtn);
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const shouldResolve = Math.random() > 0.3;
+    const shouldResolve = Math.random() > 0.3;
+    
+    setTimeout(() => {      
       if (shouldResolve) {
         resolve({ position, delay });
       } else {
