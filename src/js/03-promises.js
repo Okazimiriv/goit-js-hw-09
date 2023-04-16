@@ -1,47 +1,49 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio'; 
+
 const refs = {
-  // formEl: document.querySelector('form'),
+  formEl: document.querySelector('form'),
   inputFirstDelay: document.querySelector('[name="delay"]'),
   inputDelayStep: document.querySelector('[name="step"]'),
   inputAmount: document.querySelector('[name="amount"]'),
   submitBtn: document.querySelector('button[type="submit"]'),
   };
 
-  refs.submitBtn.addEventListener('click', onSubmitBtn);
-// refs.inputFirstDelay.addEventListener('input', onSubmitBtn);
-  refs.inputFirstDelay.addEventListener('change', setInput);
-  refs.inputDelayStep.addEventListener('change', setInput);
-  refs.inputAmount.addEventListener('change', setInput);
-  
+refs.formEl.addEventListener('click', onSubmitBtn);
 
-//  console.log(refs.formEl);
-setInput();
-
-function setInput() {
-  let firstDelay = refs.inputFirstDelay.value;
-  let delayStep = refs.inputDelayStep.value;
-  let amount = refs.inputAmount.value;
-  console.log('firstDelay', firstDelay);
-  console.log('delayStep', delayStep);
-  console.log('amount', amount);
+function createPromise(position, delay) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const shouldResolve = Math.random() > 0.3;
+      if (shouldResolve) {
+        resolve({ position, delay });
+      } else {
+        reject({ position, delay });
+      }
+    }, delay)
+  });
 }
 
-function onSubmitBtn(evt) { 
-  // evt.preventDefault();
+function onSubmitBtn(e) { 
+  e.preventDefault();
 
-  
-  
+  let delay = Number(refs.inputFirstDelay.value);
+  let step = Number(refs.inputDelayStep.value);
+  let amount = Number(refs.inputAmount.value);
+ console.log('delay', delay);
+  console.log('step', step);
+  console.log('amount', amount);
 
-};
+    for (let i = 1; i <= amount; i += 1) {
+      let delayPromise = delay + step * i;
+      console.log('i', delayPromise);
 
-// function createPromise(position, delay) {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       const shouldResolve = Math.random() > 0.3;
-//       if (shouldResolve) {
-//         // Fulfill
-//       } else {
-//         // Reject
-//       } 
-//     }, 1000 * delay)    
-//   }
-// }
+    createPromise(i, delayPromise)
+    .then(({ position, delay }) => {
+      Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+    })
+    .catch(({ position, delay }) => {
+      Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+    });
+  }  
+}
+
