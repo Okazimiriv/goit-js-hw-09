@@ -67,8 +67,8 @@ const timer = {
 
       if (deltaTime <= 1000) {
         this.stop();   
-      }
-
+      }          
+          refs.inputData.disabled = true;
       upDateTimer(time);          
     }, TIMER_DELAY);    
   },
@@ -114,7 +114,6 @@ function pad(value) {
   // Принимает число, приводит к строке и добавляет в начало 0 если число меньше 2-х знаков
   return String(value).padStart(2, '0');
 };
-
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time

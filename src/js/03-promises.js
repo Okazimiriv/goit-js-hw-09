@@ -28,8 +28,7 @@ function onSubmitBtn(e) {
       Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
     refs.form.reset();
-  } 
-   
+  }    
 }
 
 function createPromise(position, delay) {
