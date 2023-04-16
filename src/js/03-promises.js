@@ -28,14 +28,10 @@ function onSubmitBtn(e) {
 
   let delay = Number(refs.inputFirstDelay.value);
   let step = Number(refs.inputDelayStep.value);
-  let amount = Number(refs.inputAmount.value);
- console.log('delay', delay);
-  console.log('step', step);
-  console.log('amount', amount);
+  let amount = Number(refs.inputAmount.value); 
 
     for (let i = 1; i <= amount; i += 1) {
-      let delayPromise = delay + step * i;
-      console.log('i', delayPromise);
+      let delayPromise = delay + step * i;      
 
     createPromise(i, delayPromise)
     .then(({ position, delay }) => {
