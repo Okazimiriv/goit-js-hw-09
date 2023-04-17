@@ -13,12 +13,12 @@ refs.form.addEventListener('click', onSubmitBtn);
 function onSubmitBtn(e) { 
   e.preventDefault();
   
-  let valueDelay = Number(refs.inputDelay.value);
+  let delayValue = Number(refs.inputDelay.value);
   let step = Number(refs.inputStep.value);
   let amount = Number(refs.inputAmount.value);  
 
   for (let position = 1; position <= amount; position += 1) {
-     let delayPromise = valueDelay + step * position;      
+     let delayPromise = delayValue + step * (position - 1);     
   
     createPromise(position, delayPromise)
       .then(({ position, delay }) => {
